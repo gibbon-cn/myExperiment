@@ -13,6 +13,10 @@ export class RedisClient {
             console.log("Error " + err);
         });
     }
+    async connect() {
+
+    }
+
     private _getAsync: (string) => Promise<string>;
     private _setAsync: (k:string, v:string) => Promise<void>;
 
