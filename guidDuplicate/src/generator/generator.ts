@@ -5,7 +5,7 @@ export interface Generator{
     /**
      * @param max:最大生成数
      */
-    start?: (max:number)=> Promise<number|void> | void;
+    start?: (max?:number)=> Promise<number|void> | void;
     stop?: ()=>void;
     /**
      * 注册guid句柄

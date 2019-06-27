@@ -13,11 +13,11 @@ export class FileGenerator implements Generator{
      * @param path 输入文本的路径
      */
     constructor(private path:string) {
-
+        this.events = new EventEmitter();
     }
     private events: EventEmitter;
     private count: number;
-    async start(max: number) {
+    start(max?: number):Promise<number> {
         this.count = 0;
         const fileStream = fs.createReadStream(this.path);
     
@@ -31,13 +31,14 @@ export class FileGenerator implements Generator{
             if(extracted) {
                 this.events.emit("guid", extracted);
                 this.count ++;
-                if(this.count >= max) {
+                if(max && this.count >= max) {
                     rl.close();
+                    fileStream.close();
                 }
             }            
         });
     
-        return await new Promise<number>(function(c, r){
+        return new Promise<number>((c, r) => {
             rl.on('close', ()=>{
                 console.log("FileGenerator Closed: " + this.count);
                 c(this.count);
