@@ -1,3 +1,4 @@
-import { repeatGuid } from "./master";
+// import { repeatGuid } from "./local/master";
+// repeatGuid(2000000);
+import {FileGenerator} from "./file/fileGenerator";
 
-repeatGuid(200000);

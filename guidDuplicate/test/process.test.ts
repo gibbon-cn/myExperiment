@@ -1,4 +1,4 @@
-import {forkFile} from "../src/process";
+import {forkFile} from "../src/local/process";
 
 var i = 0;
 var doFork = () => {

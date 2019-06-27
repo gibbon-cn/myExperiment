@@ -23,9 +23,9 @@ var count = {
 var doGuid = (label:string, max:number) => {
     count[label] = count[label] + 1;
     forkFile("./src/worker.ts", (c, s, ch)=>{
-        if(count[label]%100==0) {
+        // if(count[label]%100==0) {
             console.log( getTime('H:i:s') + ": " + label + ":" + count[label] + " is started: " + ch.pid);
-        }
+        // }
         if(count[label]<max) {
             doGuid(label, max);
         }
