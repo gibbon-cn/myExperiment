@@ -1,6 +1,6 @@
-import {RedisClient} from "../redis/client";
+import {RedisClient} from "./client";
 import {Checker} from "../checker";
-import * as fs from "../file/file";
+import * as fs from "../../generator/file/file";
 
 export class RedisChecker implements Checker {
     client: RedisClient;

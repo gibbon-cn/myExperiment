@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import {RedisClient} from "../src/redis/client";
+import {RedisClient} from "../src/checker/redis/client";
 describe('RedisClient', function() {
   describe('get', async function() {
     var client: RedisClient;

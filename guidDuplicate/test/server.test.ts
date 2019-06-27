@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { HttpWsServer } from "../src/agent/server";
+import { HttpWsServer } from "../src/generator/agent/server";
 import {extractGuid} from "../src/lib/guid";
 
 describe('DedupServer', function() {    

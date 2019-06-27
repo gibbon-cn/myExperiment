@@ -1,6 +1,6 @@
 import * as assert from "assert";
-import {RedisChecker} from "../src/redis/redisChecker";
-import {Checker} from "../src/checker";
+import {RedisChecker} from "../src/checker/redis/redisChecker";
+import {Checker} from "../src/checker/checker";
 import {createGUID} from "../src/lib/guid";
 
 describe('RedisChecker', function() {
