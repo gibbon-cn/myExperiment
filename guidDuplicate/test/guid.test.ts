@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import {extractGuid} from "../src/lib/guid";
+import {extractGuid} from "../src/guid/guidLib";
 
 describe('Dump', function() {
   describe('extract', async function() {

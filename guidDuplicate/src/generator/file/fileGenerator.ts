@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as readline from "readline";
 import {Generator} from "../generator";
 import {EventEmitter} from "events";
-import {extractGuid} from "../../lib/guid";
+import {extractGuid} from "../../guid/guidLib";
 
 /**
  * 从文本数据读取历史数据，提取GUID

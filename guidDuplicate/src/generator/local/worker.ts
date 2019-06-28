@@ -1,5 +1,5 @@
-import {RedisClient} from "../../checker/redis/client";
-import {createGUID} from "../../lib/guid";
+import {RedisClient} from "../../checker/kvclient/client";
+import {createGUID} from "../../guid/guidLib";
 import * as fs from "../file/file";
 
 const dev = process.env.NODE_ENV? true: false;

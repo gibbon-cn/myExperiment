@@ -1,5 +1,5 @@
 import {readLine} from "./file";
-import {RedisClient} from "../../checker/redis/client";
+import {RedisClient} from "../../checker/kvclient/client";
 
 interface Pair {
     key:string;

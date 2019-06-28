@@ -1,8 +1,10 @@
 
 import * as redis from "redis";
-import {promisify} from "util";
+import {promisify, deprecate} from "util";
 
-
+/**
+ * 作废 by RedisKVClient
+ */
 export class RedisClient {
 
     private client;

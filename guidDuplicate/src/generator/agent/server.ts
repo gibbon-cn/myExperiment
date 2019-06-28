@@ -4,7 +4,7 @@ import * as httpolyglot from "httpolyglot";
 import * as expressStaticGzip from "express-static-gzip";
 import {Server as WsServer} from "ws";
 import {EventEmitter} from "events";
-import {extractGuid} from "../../lib/guid";
+import {extractGuid} from "../../guid/guidLib";
 
 /**
  * GUID生成器

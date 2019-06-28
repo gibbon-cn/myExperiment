@@ -1,7 +1,7 @@
 import * as assert from "assert";
-import {RedisChecker} from "../src/checker/redis/redisChecker";
+import {RedisChecker} from "../src/checker/kvclient/redisChecker";
 import {Checker} from "../src/checker/checker";
-import {createGUID} from "../src/lib/guid";
+import {createGUID} from "../src/guid/guidLib";
 
 describe('RedisChecker', function() {
     var checker: Checker = new RedisChecker();
