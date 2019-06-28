@@ -2,25 +2,19 @@
 // repeatGuid(2000000);
 import {Generator} from "./generator/generator";
 import {FileGenerator} from "./generator/file/fileGenerator";
-import {Checker} from "./checker/checker";
-import {RedisChecker} from "../recycleBin/redisChecker";
+import {Checker, CheckerWitKV} from "./checker/checker";
+import { RedisKVClient } from "./checker/kvclient/kvClient";
+import { AgentGenerator } from "./generator/agent/agentGenerator";
 
 async function main() {
-    var checker:Checker = new RedisChecker();
-
-    if(checker.start) {
-        checker.start();
-    }
+    var checker: Checker = new CheckerWitKV(new RedisKVClient());
+ 
+    var generator:Generator = new AgentGenerator("127.0.0.1", 80); 
     
-    var generator:Generator = new FileGenerator("e://temp//ROBILLID.sql");
-    
-    generator.onGuid((guid) => {
-        checker.check(guid);
-    })
-    
-    if(generator.start){
-        await generator.start(10);
-    }
+    generator.start();
+    generator.onGuid((info)=>{
+        checker.checkDuplicate(info);
+    });
 }
 
 main();

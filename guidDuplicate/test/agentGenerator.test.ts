@@ -1,15 +1,16 @@
 import * as assert from "assert";
-import { HttpWsServer } from "../src/generator/agent/server";
+import { AgentGenerator } from "../src/generator/agent/agentGenerator";
 
-describe('HttpWsServer', function() {    
+describe('AgentGenerator', function() {    
   describe('accept guid', async function() {
-      var server = new HttpWsServer("127.0.0.1", 80); 
+      var server = new AgentGenerator("127.0.0.1", 80); 
       var count = 0
       this.beforeEach((done)=>{
         server.start();
-        server.onGuid((guid)=>{
+        server.onGuid((info)=>{
+            console.log(JSON.stringify(info));
             count ++;
-            if(count >= 100) {
+            if(count >= 1000) {
               done();
             }
         });

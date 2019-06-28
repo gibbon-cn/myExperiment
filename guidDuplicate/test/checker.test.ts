@@ -11,7 +11,8 @@ describe('RedisChecker', function() {
         var info:GuidInfo = {
             guid: createGUID(),
             source: "guidDuplicate\\test\\checker.test.ts",
-            createdTime: Date.now()
+            createdTime: Date.now(),
+            generator: "Dummy"
         }
         var r = await checker.checkDuplicate(info);
         assert.equal(r, false);
@@ -24,7 +25,8 @@ describe('RedisChecker', function() {
         var info:GuidInfo = {
             guid: "d115fb85-ca88-41e4-e4e4-59d9cf84cb14",
             source: "guidDuplicate\\test\\checker.test.ts",
-            createdTime: Date.now()
+            createdTime: Date.now(),
+            generator: "Dummy"
         }
         var r = await checker.checkDuplicate(info);
         assert.equal(r, true);

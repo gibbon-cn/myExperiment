@@ -6,19 +6,13 @@ import * as path from "path";
 import {Server as WsServer} from "ws";
 import {EventEmitter} from "events";
 import {extractGuid} from "../../guid/guidLib";
-/**
- * GUID生成器
- */
-export interface DedupServer{
-    start?: ()=>void;
-    stop?: ()=>void;
-    /**
-     * 注册guid句柄
-     */
-    onGuid: (handler:(guid:string) => void) => void;
-}
+import {Generator} from "../generator";
+import {GuidInfo} from "../../guid/guidInfo";
 
-export class HttpWsServer implements DedupServer{
+/**
+ * 代理生成器，使用外部生成器，以WS与其通信
+ */
+export class AgentGenerator implements Generator{
     private events: EventEmitter
 
     /**
@@ -47,13 +41,22 @@ export class HttpWsServer implements DedupServer{
         const wss = new WsServer({server});
 
         wss.on('connection', ws => {
-            console.log("connected");
-
+            // console.log("connected");
+            var agent = "";
             ws.on('message', (message) => {
-                console.log('received: %s', message);
+                if(message.toString().indexOf("agent::")>-1){
+                    agent = message.toString();
+                }
+                // console.log('received: %s', message);
                 var extracted = extractGuid(message as string);
                 if(extracted) {
-                    this.events.emit("guid", extracted);
+                    var info:GuidInfo = {
+                        guid: extracted,
+                        source: agent,
+                        createdTime: Date.now(),
+                        generator: "AgentGenerator"
+                    }
+                    this.events.emit("guid", info );
                 }
                 ws.send("you send a guid!");
             });
@@ -71,9 +74,9 @@ export class HttpWsServer implements DedupServer{
         this.events.emit("close");
     };
 
-    onGuid(handler: (guid: string) => void):void {
-        this.events.on("guid", (guid:string)=>{
-            handler(guid);
+    onGuid(handler: (info: GuidInfo) => void):void {
+        this.events.on("guid", (info: GuidInfo)=>{
+            handler(info);
         })
     };    
 }
