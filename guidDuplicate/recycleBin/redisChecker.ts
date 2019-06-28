@@ -1,7 +1,10 @@
 import {RedisClient} from "./client";
-import {Checker} from "../checker";
-import * as fs from "../../generator/file/file";
+import {Checker} from "../src/checker/checker";
+import * as fs from "../src/generator/file/file";
 
+/**
+ * deprecated by CheckerWithKV
+ */
 export class RedisChecker implements Checker {
     client: RedisClient;
     constructor(){

@@ -1,21 +1,21 @@
 import * as assert from "assert";
 import { HttpWsServer } from "../src/generator/agent/server";
-import {extractGuid} from "../src/guid/guidLib";
 
-describe('DedupServer', function() {    
+describe('HttpWsServer', function() {    
   describe('accept guid', async function() {
-      var server = new HttpWsServer("127.0.0.1", 8848); 
-      var aGuid = "";
+      var server = new HttpWsServer("127.0.0.1", 80); 
+      var count = 0
       this.beforeEach((done)=>{
         server.start();
         server.onGuid((guid)=>{
-            aGuid = guid;
-            done();
+            count ++;
+            if(count >= 100) {
+              done();
+            }
         });
       })
-    it('should match', function() {      
-        console.log(aGuid);
-        assert.equal( extractGuid(aGuid) != null, true);
+    it('should match 100', function() {      
+        assert.equal( count, 100);
       });
   });
 });

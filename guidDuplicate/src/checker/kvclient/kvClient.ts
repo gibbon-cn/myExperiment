@@ -9,6 +9,7 @@ export interface KVClient {
     exists: (key:string) => Promise<boolean>;
     set: (key:string, value:string) => Promise<void>;
     get: (key:string) => Promise<string>;
+    count: ()=> Promise<number>;
 }
 
 export class RedisKVClient implements KVClient{ 
@@ -35,5 +36,10 @@ export class RedisKVClient implements KVClient{
 
     public async set(key:string, value: string): Promise<void> {
         return await promisify(this.client.set).bind(this.client)(key, value);
+    }
+
+    public async count(): Promise<number> {
+        // 并不是精确所需要的数码
+        return await promisify(this.client.dbsize).bind(this.client)();
     }
 }

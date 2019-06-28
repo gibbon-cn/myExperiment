@@ -2,10 +2,10 @@ import * as http from "http";
 import * as express from "express";
 import * as httpolyglot from "httpolyglot";
 import * as expressStaticGzip from "express-static-gzip";
+import * as path from "path";
 import {Server as WsServer} from "ws";
 import {EventEmitter} from "events";
 import {extractGuid} from "../../guid/guidLib";
-
 /**
  * GUID生成器
  */
@@ -38,6 +38,11 @@ export class HttpWsServer implements DedupServer{
         server.on("listening", ()=>{
             console.log("listening");
         })
+
+        var staticPath = path.join(__dirname, "./web");
+        console.log("Static Path: " + staticPath);
+        const staticGzip = expressStaticGzip(staticPath);
+        app.use(staticGzip);
 
         const wss = new WsServer({server});
 

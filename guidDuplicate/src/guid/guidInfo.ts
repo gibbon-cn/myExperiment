@@ -1,5 +1,5 @@
-export default interface GuidInfo {
+export interface GuidInfo {
     guid: string;
-    createdTime: string;
     source: string;
+    createdTime: number;
 }

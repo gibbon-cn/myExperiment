@@ -3,7 +3,7 @@
 import {Generator} from "./generator/generator";
 import {FileGenerator} from "./generator/file/fileGenerator";
 import {Checker} from "./checker/checker";
-import {RedisChecker} from "./checker/kvclient/redisChecker";
+import {RedisChecker} from "../recycleBin/redisChecker";
 
 async function main() {
     var checker:Checker = new RedisChecker();

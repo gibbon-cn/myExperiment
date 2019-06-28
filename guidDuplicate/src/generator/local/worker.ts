@@ -1,4 +1,4 @@
-import {RedisClient} from "../../checker/kvclient/client";
+import {RedisClient} from "../../../recycleBin/client";
 import {createGUID} from "../../guid/guidLib";
 import * as fs from "../file/file";
 
