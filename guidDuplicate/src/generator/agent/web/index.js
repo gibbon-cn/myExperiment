@@ -13,7 +13,7 @@
     ws.onopen = function (evt) {
         console.log("Connection open ...");
         ws.send("agent::" + window.navigator.userAgent);
-        for(var i =0; i<100; i++) {
+        for(var i =0; i<10000; i++) {
             var guid = createGUID();
             ws.send(guid);
         }

@@ -41,7 +41,7 @@ export class AgentGenerator implements Generator{
         const wss = new WsServer({server});
 
         wss.on('connection', ws => {
-            // console.log("connected");
+            console.log("connected");
             var agent = "";
             ws.on('message', (message) => {
                 if(message.toString().indexOf("agent::")>-1){
