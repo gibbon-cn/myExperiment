@@ -7,7 +7,7 @@ import { RedisKVClient, KVClient } from "./checker/kvclient/kvClient";
 import { AgentGenerator } from "./generator/agent/agentGenerator";
 
 async function main() {
-    var kvClient: KVClient = new RedisKVClient("6379", "10.24.19.123");
+    var kvClient: KVClient = new RedisKVClient("6379", "redis-server");
     await kvClient.connect();
     var checker: Checker = new CheckerWitKV(kvClient);
  
