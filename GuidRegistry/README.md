@@ -77,11 +77,16 @@ DuplicateLog {
 
 `unregister: (access:Access) => Result<Boolean, Registration>`
 
-### 对外提供RPC接口
+## 服务接口
 
-作为内部接口，Core(主) - HttpInerface(客)
+* Core (客) *-tcp-1 (主) Redis
+* Core (主) 1-rpc-* (客) Interface<httpServer|wsServer|fileStream>
 
-？不知道怎么定义
+RPC接口该如何定义？
+
+gRPC、socket比较？
+
+本地命令行 `guidr $filepath`
 
 ## 服务
 
