@@ -71,12 +71,54 @@ DuplicateLog {
 
 ### 获取
 
-`retrieve: (access:Access) => Result<Boolean, Registration>`
+`retrieve: (guid:String) => Result<Boolean, Registration>`
 
 ### 注销
 
 `unregister: (access:Access) => Result<Boolean, Registration>`
 
-### 服务
+### 对外提供RPC接口
 
-对外提供 REST API
+作为内部接口，Core(主) - HttpInerface(客)
+
+？不知道怎么定义
+
+## 服务
+
+### REST API
+
+作为系统的标准接口。
+
+`POST /registry`
+
+    register: (info:Registration) => Result<RetrieveState, Access>
+
+`GET /registry?`
+
+    retrieve: (guid:String) => Result<Boolean, Registration>
+
+`DELETE /registry?`
+
+    unregister: (access:Access) => Result<Boolean, Registration>
+
+#### REST API服务界面
+
+`http://$host/$port/agent/rest.html`
+
+### WS服务：批量注册
+
+作为批量注册接口，可以用于验证不同浏览器引擎的GUID算法的重复周期。
+
+`ws://$host/$port/registry`
+
+client -> server: `agent::window.navigator.userAgent`
+<!-- client -> server: `generator::$function_definition` -->
+client -> server: `registration::JSON.stringify(Registration)`
+
+#### 文件服务：批量注册
+
+作为批量注册接口，可以用于验证不同浏览器引擎的GUID算法的重复周期。
+
+思考：需求规格文档与服务接口、数据格式定义的双向绑定？
+
+需求规格文档 <=> 数据格式类定义，服务定义 => 系统说明文档
