@@ -6,6 +6,7 @@ import {promisify} from "util";
  * k-v内存客户端
  */
 export interface KVClient {
+    connect?: () => Promise<void>;
     exists: (key:string) => Promise<boolean>;
     set: (key:string, value:string) => Promise<void>;
     get: (key:string) => Promise<string>;
@@ -15,12 +16,23 @@ export interface KVClient {
 export class RedisKVClient implements KVClient{ 
     private client;
 
-    constructor() {
-        this.client = redis.createClient();
-        this.client.on("error", function (err) {
-            console.log("Error " + err);
+    constructor(private port:string="6379", private host:string="127.0.0.1") {
+
+    }
+
+    public connect(): Promise<void> {
+        this.client = redis.createClient(this.port, this.host);
+        return new Promise((c,r)=>{
+            this.client.on("error", (err) => {
+                r(err);
+            });
+            this.client.on("connect", ()=>{
+                console.log("connected");
+                c();
+            });
         });
     }
+
     public async exists(key: string): Promise<boolean>{
         var r = await promisify(this.client.exists).bind(this.client)(key);
         if(r == "1") {

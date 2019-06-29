@@ -3,13 +3,15 @@
 import {Generator} from "./generator/generator";
 import {FileGenerator} from "./generator/file/fileGenerator";
 import {Checker, CheckerWitKV} from "./checker/checker";
-import { RedisKVClient } from "./checker/kvclient/kvClient";
+import { RedisKVClient, KVClient } from "./checker/kvclient/kvClient";
 import { AgentGenerator } from "./generator/agent/agentGenerator";
 
 async function main() {
-    var checker: Checker = new CheckerWitKV(new RedisKVClient());
+    var kvClient: KVClient = new RedisKVClient("6379", "10.24.19.123");
+    await kvClient.connect();
+    var checker: Checker = new CheckerWitKV(kvClient);
  
-    var generator:Generator = new AgentGenerator("127.0.0.1", 80); 
+    var generator:Generator = new AgentGenerator("127.0.0.1", 80);
     
     generator.start();
     generator.onGuid((info)=>{

@@ -4,7 +4,7 @@
 
 	git clone https://github.com/gibbon-cn/myExperiment.git
 	# 或
-	docker run -ti --rm -v ${HOME}:/root -v $(pwd):/git git clone https://github.com/gibbon-cn/myExperiment.git
+	docker run -ti --rm -v ${HOME}:/root -v $(pwd):/git alpine/git clone https://github.com/gibbon-cn/myExperiment.git
 	
 集成
 
@@ -14,18 +14,9 @@
 	# 或
 	docker
 
-部署
-
-	# 启动Redis
-    mkdir -p ~/data/redis
-    docker run -p 6379:6379 -v $PWD/data/redis:/data -d redis:latest redis-server --appendonly yes
-
-    # Redis Cli
-    docker exec -it 43f7a65ec7f8 redis-cli
+运行
     
 	node --require ts-node/register src/main.ts
 	# 或
-	docker	
-
-镜像列表
+	docker run -ti --link redis:redis-server --rm -v $PWD:/project node  cd /project && npm install
 
