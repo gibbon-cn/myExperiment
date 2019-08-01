@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <script src="./libs/mousetrap.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script>
+
+        $(function () {
+            var onK = function (e, des) {
+                console.log(des);
+                $('#Listening')[0].innerText = $('#Listening')[0].innerText + "\n" + des + " done!";
+                return false;
+            }
+            $('#addBtn').bind('click', function () {
+                var ctrl = $('#ctrlInput').prop("checked");
+                var alt = $('#altInput').prop("checked");
+                var key = $('#keyInput').val().substring(0,1);
+
+                if(key) {
+                    var toBinding = (ctrl? 'ctrl+':'') + (alt? 'alt+':'') + key;
+                }
+
+                Mousetrap.bind(toBinding, onK);
+
+                $('#keyList')[0].innerText = $('#keyList')[0].innerText + "\n" + toBinding;
+
+            })
+        })        
+    </script>
+</head>
+
+<body>
+    <div>
+        <div>增加快捷键</div>
+        <br />
+        <input id='ctrlInput' type="checkbox" name="ctrl" value='true'/>Ctrl<br />
+        <input id='altInput' type="checkbox" name="alt" />Alt<br />
+        <input id='keyInput' type="text" name="key" />
+        <input id='addBtn' type="button" name="key" value="Add" />
+    </div>
+    <br />
+    <div>
+        快捷键列表 <br />
+        <div id='keyList'>
+        </div>
+        <br />
+    </div>
+    <div>
+        监听 <br />
+        <div id="Listening"></div>
+    </div>
+</body>
+
+</html>
