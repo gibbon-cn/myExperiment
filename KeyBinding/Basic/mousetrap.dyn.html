@@ -7,6 +7,12 @@
     <script>
 
         $(function () {
+            Mousetrap.bind("ctrl+a", function(){
+                console.log('1')
+            });
+            Mousetrap.bind("ctrl+a", function(){
+                console.log('2')
+            });
             var onK = function (e, des) {
                 console.log(des);
                 $('#Listening')[0].innerText = $('#Listening')[0].innerText + "\n" + des + " done!";
@@ -14,11 +20,12 @@
             }
             $('#addBtn').bind('click', function () {
                 var ctrl = $('#ctrlInput').prop("checked");
+                var shift = $('#shiftInput').prop("checked");
                 var alt = $('#altInput').prop("checked");
                 var key = $('#keyInput').val().substring(0,1);
 
                 if(key) {
-                    var toBinding = (ctrl? 'ctrl+':'') + (alt? 'alt+':'') + key;
+                    var toBinding = (ctrl? 'ctrl+':'') + (shift? 'shift+':'') + (alt? 'alt+':'') + key;
                 }
 
                 Mousetrap.bind(toBinding, onK);
@@ -26,7 +33,7 @@
                 $('#keyList')[0].innerText = $('#keyList')[0].innerText + "\n" + toBinding;
 
             })
-        })        
+        })
     </script>
 </head>
 
@@ -35,6 +42,7 @@
         <div>增加快捷键</div>
         <br />
         <input id='ctrlInput' type="checkbox" name="ctrl" value='true'/>Ctrl<br />
+        <input id='shiftInput' type="checkbox" name="shift" />Shift<br />
         <input id='altInput' type="checkbox" name="alt" />Alt<br />
         <input id='keyInput' type="text" name="key" />
         <input id='addBtn' type="button" name="key" value="Add" />
